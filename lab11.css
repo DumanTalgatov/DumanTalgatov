@@ -1,0 +1,443 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html{
+    overflow-x: hidden;
+}
+body{
+    font-family: sans-serif;
+}
+.carouseltxt h1{
+    position: absolute;
+    z-index: 20;
+    margin-top: 200px;
+    margin-left: 240px;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0,0,0,.6);
+}
+#map {
+    height: 400px;
+    width: 600px;
+}
+#map{
+    justify-content: center;
+    margin-left: 90px;
+    display: none;
+}
+#maptxt{
+    margin-left: 360px;
+    display: none;
+}
+.row{
+    margin-top: 50px;
+    
+    display: flex;
+    justify-content: center;
+}
+.row .card{
+    margin-left: 15px;
+}
+#mappicture img{
+    display: none;
+    width: 500px;
+    height: 300px;
+    justify-content: center;
+    margin-left: 700px;
+    margin-top: -400px;
+}
+#mappicture p{
+    text-align: justify;
+    display: none;
+    margin-top: 100px;
+}
+.header{
+    
+    display: flex;
+}
+.header .main_menu{
+    float: right;
+    margin-top: 60px;
+    margin-left: 200px;
+}
+.header .main_menu ul li{
+    display: inline;
+    position: relative;
+    color: black;
+    list-style: none;
+    margin-right: 80px;
+}
+.header .main_menu ul li:after {
+	display: block;
+	position: absolute;
+	left: 0;
+	width: 0;
+	height: 2px;
+	background-color: #00a650;
+	content: "";
+    transition: width 0.3s ease-out;
+}
+.header .main_menu ul li:hover:after,
+.header .main_menu ul li:focus:after {
+	width: 100%;
+}
+.logo img{
+    width: 150px;
+    height: 150px;
+    float: left;
+    margin-left: 50px;
+    margin-top: -15px;
+}
+.main #carouselExampleControls img{
+    width: 100%;
+    height: 500px;
+}
+.menu{
+	display: flex;
+	justify-content: center;
+}
+.visibleMenu {
+    width: 785px;
+    height: 80px;
+    margin-left: 170px;
+    margin-top: 0px;
+    background: black;
+    opacity: 0.8;
+    display: none;
+    z-index: 20;
+    position: absolute;
+}
+.subMenu {
+    float: left;
+    margin-left: 30px;
+    z-index: 20;
+}
+.subMenu p {
+    font-family:  "Exo2-Bold", sans-serif;
+    font-size: 19px;
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+.subMenu ul {
+    border-top: 2px solid white;
+}
+.subMenu ul li {
+    float: none;
+    list-style: none;
+    text-align: center;
+    margin-bottom: 5px;
+    z-index: 20;
+}
+.subMenu ul li a {
+    display: block;
+    width: 135px;
+    height: 20px;
+    text-decoration: none;
+    font-family:  "Exo2-Medium", sans-serif;
+    font-size: 17px;
+    color: white;
+    cursor: pointer;
+    padding-top: 3px;
+}
+.up, .down {
+    font-size: 12px;
+}
+.popup{
+    position: absolute;
+    top: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.6);
+    z-index: 2;
+    opacity: 0;
+    border:none;
+    text-decoration: none;
+}
+.bt{
+	opacity: 0;
+}
+.popup-content{
+    border-top-left-radius: 20%;
+    border-bottom-right-radius: 20%;
+    background-color: #7587F5;
+    height: 375px;
+    width: 500px;
+    position: relative;
+    padding: 20px;
+    
+    text-align: center;
+    margin-top: 10px;
+    border:none;
+    text-decoration: none;
+}
+.icon{
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
+	margin: -60px 0 40px 0;
+	border: 2px solid #8AD6E6;
+}
+#a{
+	color: black;
+}
+#a1{
+	color: black;
+}
+input[type="text"], input[type="username"]{
+
+	margin-bottom: 15px;
+}
+input[type="text"], input[type="password"]{
+
+	margin-bottom: 15px;
+}
+input[type="text"], input[type="password2"]{
+
+	margin-bottom: 15px;
+}
+input{
+    width: 60%;
+    padding: 8px;
+    border-radius: 20px/20px;
+    border:none;
+    text-decoration: none;
+    box-shadow: 2px 2px 5px #544C4C;
+    margin-top: 15px;
+}
+input:focus{
+	border: 2px solid #FD6060;
+}
+button[type="sign"]{
+	margin-bottom: 20px;
+	border-radius: 15px/15px;
+	background-color: white;
+	color: black;
+	border: 1px solid black;
+	line-heigth: bold;
+}
+.closed{
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    border-radius: 50%;
+    border: 1px solid grey;
+    cursor: pointer;
+}
+.user_profile{
+    position: absolute;
+    top: 80px;
+    right: 30px;
+    margin: 0;
+    background-color: rgba(0, 255, 76, 0.548);
+    border-radius: 5px;
+    z-index: 1;
+    display: none;
+}
+
+#profile_img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline;
+}
+
+#user_name{
+    margin: 0;
+    padding: 10px;
+    display: inline;
+    font-size: 25px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.container .header .main_menu ul li{
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+}
+.card1 {
+    width: 287px;
+    height: 250px;
+    position: relative;
+    perspective: 1000px;
+    margin-right: 10px;
+}
+.card1 img{
+    width: 287px;
+    height: 250px;
+}
+.front, .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 1s;
+    backface-visibility: hidden;
+    border-radius: 10px;
+}   
+.front {
+    background-color: #fff;
+}
+.back {
+    background-color: #BDBDBD;
+    transform: rotateY(180deg);
+}
+.card1:hover .front {transform: rotateY(180deg);}
+.card1:hover .back {transform: rotateY(360deg);}
+.east div{
+    margin-bottom: 10px;
+}
+.east{
+    display: none;
+}
+.east div #alakoltext{
+    width: 600px;
+    float: right;
+    margin-top: 70px;
+    margin-right: 100px;
+}
+.east div #altaitext{
+    width: 600px;
+    float: right;
+    margin-top: 70px;
+    margin-right: 100px;
+}
+.east div #bukhtarmatext{
+    width: 600px;
+    float: right;
+    margin-top: 70px;
+    margin-right: 100px;
+}
+.west{
+    display: none;
+}
+.west div{
+    margin-bottom: 10px;
+}
+.west div #moutext{
+    width: 600px;
+    float: right;
+    margin-top: 70px;
+    margin-right: 100px;
+}
+.west div #moutext2{
+    width: 600px;
+    float: right;
+    margin-top: 70px;
+    margin-right: 100px;
+}
+.north{
+    display: none;
+}
+.north div{
+    margin-bottom: 10px;
+}
+.north div #burabaitext{
+    width: 600px;
+    float: right;
+    margin-top: 70px;
+    margin-right: 100px;
+}
+.south{
+    display: none;
+}
+.south div{
+    margin-bottom: 10px;
+}
+.south div #charyntext{
+    width: 600px;
+    float: right;
+    margin-top: 70px;
+    margin-right: 100px;
+}
+iframe{
+    display: block;
+}
+.inspiration{
+    display: none;
+}
+#toggle{
+    display: none;
+}
+.nav label{
+    margin: 8px 0 0 20px;
+    font-size: 30px;
+    display: none;
+}
+
+
+@media (max-width: 600px) {
+    .menu{
+        margin: 0 250px;
+    }
+    .container .header .main_menu ul li{
+        display: none;
+        text-align: center;
+        font-size: 25px;
+        margin-left: -70px;
+        border-bottom: 1px solid grey;
+    }
+    .container .header .main_menu{
+        margin-top: -20px;
+    }
+    .logo{
+        display: none;
+    }
+    .nav label{
+        display: block;
+    }
+    #toggle:checked + .container .header .main_menu ul li{
+        display: block;
+    }
+    .row .col-sm .card{
+        margin-left: 100px;
+    }
+    .carouseltxt{
+        margin-left: -100px;
+    }
+    .inspiration iframe{
+        width: 450px;
+        margin-left: 20px;
+    }
+    .visibleMenu{
+        width: 200px;
+        height: 210px;
+        margin-left: 115px;
+    }
+    .user_profile{
+        margin-top: -80px;
+    }
+    .east #alakoltext, #altaitext, #bukhtarmatext{
+        padding-left: 250px;
+    }
+    .west #moutext, #moutext2{
+        padding-left: 250px;
+    }
+    .north #burabaitext{
+        padding-left: 250px;
+    }
+    .south #charyntext{
+        padding-left: 250px;
+    }
+    #map{
+        width: 350px;
+        height: 250px;
+        margin-left: 60px;
+    }
+    #maptxt{
+        margin-left: 50px;
+    }
+    #mappicture img{
+        margin-top: 100px;
+        margin-left: 50px;
+        width: 400px;
+        height: 300px;
+    }
+}

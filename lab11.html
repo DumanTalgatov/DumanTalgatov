@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="lab11.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnMj8Xc5_jA0tqVHCoFHCk-2sHt4imItA&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
+	<title>Beautiful Places</title>
+	
+	</style>
+	<script>
+		var map;
+  
+		function initMap() {
+		  	map = new google.maps.Map(document.getElementById("map"), {
+			center: { lat: 43.2220, lng: 76.8512 },
+			zoom: 8,
+				});
+			var icon = {
+				url: "data:image/png;base64,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",
+				scaledSize: new  google.maps.Size(20, 20),
+
+			};
+			var marker = new google.maps.Marker ({
+				position: {lat: 42.9354, lng: 78.3259},
+				map: map,
+				icon: icon
+			});
+			var icon2 = {
+				url: "https://img.favpng.com/2/10/8/canyon-icon-png-favpng-W6KpT72nfRNjPDYqE4R9pKifr.jpg",
+				scaledSize: new  google.maps.Size(20, 20),
+
+			};
+			var marker2 = new google.maps.Marker ({
+				position: {lat: 43.3513, lng: 79.0791},
+				map: map,
+				icon: icon2
+			});
+			var icon3 = {
+				url: "data:image/png;base64,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",
+				scaledSize: new  google.maps.Size(20, 20),
+
+			};
+			var marker3 = new google.maps.Marker ({
+				position: {lat: 43.0506, lng:  76.9850},
+				map: map,
+				icon: icon3
+			});
+			var icon4 = {
+				url: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUSExIWFRUVFRgXGBcYFxIXHRcVFRUWFhUXGBgaHSggHholHRUXITEiJSkrLi4uFx8zODMsNygtLisBCgoKDg0OGxAQGy8lICYtLS0tLy0wLS0tLy0tLS0tLS0vLS0tLS0vLy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAOEA4QMBEQACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAAAAgMEBQYBB//EAD8QAAEDAQQHBgQDBwMFAAAAAAEAAgMRBAUhMQYSQVFhcYETIpGhsdEyQlLBFGJyIzOCksLh8BZDogcVU4Px/8QAGwEBAAMBAQEBAAAAAAAAAAAAAAECBAMFBgf/xAAzEQACAgECAwQJBAMBAQAAAAAAAQIDEQQhEjFBBRNRcSIyYYGRobHR8DNCweEUI/EGov/aAAwDAQACEQMRAD8A9xQAgBACAEAIAQAgBAQ57zjb81Tubj55LrGmbMtmsqh1z5ECa/D8rAOePkF2WmXVmOfaMv2x+JEkvOU/PTkAP7roqYLoZpay6XX4Ed1oec3uPUq6hFdDk7ZvnJ/Ezmk9/GEtaw1cCHP/AEg/D19OaxavVd01GPPm/Lw95MI8W7LyzWgPa17TVrgCDwK2xkpJSXJnPdMfbO4ZOcOpThi+hZWTXJv4j0d4yj5yedD6qrqg+h1jq7o/uJcV9u+ZoPKo91yemXRmmHaM16yyT4L2jdmdU/mw88lylRNGyvW1S5vHmTQa4hcTUnndHUJBACAEAIAQAgBACAEAIAQAgBACACUBWWu+GtwZ3jv2f3XeFDfPYwXa+Edobv5FPaLY9/xOw3DAeC1RrjHkeZbfZZ6z+wyxpOAFVz1Gpq08HZdJRj4v8+RSuudkuGCyyS2xHaQPNfL3/wDstHB4rhKXt2S/l/JHp19j2tek0vmDrEdhB8lFH/s9JN4shKPt2a/h/Jkz7HtS9GSfyKq+bcLOwucO9k1v1H23lfRR7R09lPfVSUl0x4+Hivbk82VE4S4ZrDPOLbM55c9xq5xqTxqvGlJyk5Pmzslg0GhF7UP4d5zqY+ebm9cx1XpaC/H+t+77HO2PU2S9U4AgG5rQ1paHEAvdqt4uoTTyVZTjFpPqTgcViB2C0vZ8LiOGzwVZQjLmjpXbOv1Xgt7JfIOEgpxGXhsWaena9U9KntBPaxY9patcCKg1B2hZmsHopprKOoSCAEAIAQAgBACAEAIAQAgGLXa2xirjyG0q8IOb2ON18KlmRn7bb3yZ4N+kffetsKowPFv1U7eey8DM6U3n2UfZtPfkFOTcieuQ67ll11/dw4Vzf0OdccvIaH3h20QYT346NPFvyu8BT+Fc69dXVppWWvaC38unx5eZfuZTsUY9TYQxBooF+UdqdqXdoXd5Zy6Lol+c31PqtNpoUQ4Y+9+ItecaCDfF6x2dmvIf0tGbjuA++xa9HordVZwVrzfRHG++FMeKX/TzC970ktEhkeeDWjJrdw99q+80ejr0tfBD3vq3+fA+duvldLil/wAK6bJa0ckR2uIIINCDUEbCMiFPIk9D0av0Whuq7CVoxH1D6h9xsXuaXUq1Yfrfm5mnDh8i6caYnABazmefaR3qZpNZpIaw0Z0IOtzJFegXganUO2zK5Ll9zTCOEbO5LxE8LZNuThueM/fkQvZouVsFL4+ZwlHheCeuxUEBIslsfGe6cNoORVJ1xlzO1N86n6L9xf2K8GSYVo76Tn03rFZW4cz2qNTC5bc/AlrmaAQAgBACAEAIAQAgBAQbxvARigxcchu4ldaqnPyMmp1SqWFuzPSyFxLnGpK3JJLCPEnOU3xSe5CvG3NhYXu6Da47AFzutjVHikRFZeDz222p0r3SPOJ8hsA4BfPWWSsk5SNKWFgTcF6us0zZRiMnt+phzHPaOIWTW6b/ACaJVZxn6rdZ9hpot7qxTPYbNaGyMa9hDmuAII2gr85trlXNwmsNcz6SMlJKS5DqoWIc91QPdrvia92941sNw1q0HALTDW6iuHBCbS9m30OMqK5PilFN+3cxml1usur2MEUZfUVka1o1aH4WkDE7Ds65fT9j6bWcXfXzljom28+1p8vZ193PytbbRjgris+KXIyE+S+iR5qJNwTQNl/bsDmOFKmtGmuZG70WjTSrU/8AYtvoRNPGxuBo/ZiWvYzUIxa5jnDkRQ0Xr/4tWVKKx5GfjlyZTaTX1UdhG6oye7DvEfKKYU3+Cw63VZ/1wfm/4+5eEOrMvPkvOR2RN0bvf8PJj+7fQPG7c4cR6VWrS391Pfk+f3KzhxI9IY4EAg1BFQRtByIXup53RlOqQBO1AYK/b5dJLrxuLRH+7IJBB2vHE+lF4Oq1DtsyuS5fc01rh36m/wBBNL/xQMU1BMwZjASNy1gNjt4yxFM6DrTPjXtR6lOo4vRlz+psF1NYIAQAgBACAEAICuvm82wsJJFaE8gNpXSEE8ylyRk1Wp7pYXrM80ujSJ0lrcJCdWb4a/K4V1R1HnRc9NqnK1p8ny9n/fqeTZFtcT5mht1sbE2pBcdjWgkuPAD1XoW2qtZe/sXM4pZMXegtMzu0fFIAMhqPo0eHiV4t3f2vilF/B7HePCtslSVkLkRorgBUnYpbxuy5qNFL+fZHdnO14hcfma4dm4/MKj4TtHUba+H2p2dDWx46WnNeDW68PPwfu8t2l1EqHwzT4foby335DE0OLtckVa1nfLgciKbDvNAvl9P2dfdLCWMbNvZL88FuerZqa4LOc+W5hb+0mnmqyhiYfkFQXD8xzPIUHNfWaDsnT6f0/Wl49F5L8Z42p1llno8l4FAvXMQ3aMuqlEojqSxY2S95Y43RCQ6jtm7fQ7K8F1jfZGLgnsUcE3kX+F/ZdqHscKgFoJ1mk5VaQN2yqq6sQ401j5/AjO+CHaMuq5osh27LqlnLhGAdWlakCla0z5FdqqJ2t8PQSko8zVaPi1Wf9nLE50WxzS15Z0aSdXhTBejpu+p9GcfR+OP6OM+GW6ZqAvROJktJ771qwxnu/O4bfyjhv3+vk63VcX+uHLr9jtCHVmXkyK8w7IRYbW6KRsjDRzTUfcHgV0hNwkpIlrJ7ZorpCy1Rg172VNtRmDxHmMV6nozjxw5fQ3aXUuXoT5/UvlQ2ggBACAEAIBi22kRtLj0G8q8IObwcb7lVDiZ5PpffhlcY2uqAavP1OGTRwHryWfWXp/6oclz/AD83PGWZNzlzZkpnEOBBoRQg7iDgVhR0R6NcF7ieHXJAc3CTZQ/VyOfjuXv6a9Wwy+a5mWcOFlZfWkwoWQGpyMm79PHisep169Wv4/YtGvqzJOyPJeUdhuw2t0UjZWGjmGoriOR4EVHVUuqjdW658nsdYTcJKUeaPVtH9IorUzMNeBV8biMBtI3t4+NF8Hr+zLtJPxi+TX09j/Ee/p9VC6Pg+q/Oha2UM1QY9XVcNYatACHY1FN9arDbx8bVmcrZ557GiHDjMeRl9OL5iEbrOKPkNK5Hs6EGp/Nw415+92HoLnYtQ9or/wCv6/PLzu0NRDgda3f0/swK+vPEGrRl1UolDCksX9wW2CKN5khD5Nbu1aDUEZVOVCD4rXRdVXB8Ucy6fnQ5TUm9mQ7ZaO0cXarW8GtDQB0z5lZrLHOWWvgSlgh2jLqqIshd3W98LxJGaHIjYRtBG5darZVy4oiUU1hnoNy35HaBh3XgYsJx5jeF7dGphattn4GaUHEL3s9olGpG5sbDm4l2s7gABgOtSq3wus9GDSXzEXFbszd5aOuhjMhkYQKYYitTSg3lebdopVQ4nJHWNmXgopcisZ0QXbYHTyCNhaHEE940GGa61VSslwxEpKKyzSXVdFtssnaR6j8tZrX01gP1AUI2FbqtNfS8rD8Vnmc3ZF+w9Uue8O2jBILXD4mmgIPTDwXScOHc9fTXq2PtXMnqhpBACAEAEoDy/TPSvtHGOF2AwLxu2hvE71zu1KhHu6+fV/wjxbp97PifJcvuYpecUI8+alFkcjkIyOBzG/mp9gJDXVVSoSZHkhJEViw9Z241/wAxFD5FQyGy5sWkVpEIs0ZNG17zQS/VJyqMgK5jgsEuydPZqHe45b6dPPH32NH+XbGtVp4XzK1wxxzW7GNjKcQDVo2KUShprgNlVJI9HLU0ooIwOKCBq0ZBSiUMKSxdXNo9NM0Ssc1gqdUkuBqNo1RhitVGlssXHF4OcrEtmaE31JZx2c5jleBgWOOt/wCwFtBzz4bVseqlT6NmJP2fz+e45cClujOXleUk7qvOAyaMm8h915t187XmR1jFLkQJslyRZDEUhaQ5pIcDUEZghWTaeUSbq4NKGy0jloyTIHJr/Y8Mt25evp9ap+jPZ/JmedeN0WVx6Sg2p7G5NHdP1gYP+xHKqtHURunKv4fn5sXqlKlqa956DG8OAcMiKhcWsPDPejJSSkhSgsCAEBVaQTDs+yz1xQj8u0dcvFdqa1N78jBrruCPAub+hkrTDZoWazo42j9Dak7gKVJXacaKo5aSXkeQnJmGvK0tkkc9rAxpyaABltNMKleHdNTm5RWEaIrCK2fNc0XRa2e3QCAM/DtM2IL3AHDY4ba8MsOi099WquFQXF4lGpZznYgNYBkspYJMigRHYyqsSSgKKpUbsFsdFI2RmbTXmNoPAjBda7HXJSXQlrKwW9+3uLQ5rmto1ooK0qa0rXwy9111Wo76SaWyKQjwlYspYZtGxSiUNsYSpJJDGUUEZFKCBm0bFKJQypLFldl6vjHZ9o9sbjV2rSowoS3yrjsXau6UVw5aT8OZSUU9y2tdxMEJninD2AVxFK40zrnwIXazRxVbshLKOam84aKNYToInyUolEZSWHYWVx2KGQx1lodHI2Rpo5pBHseBy6q1c3CSkuaIxlYPZdEL2bNGKHBwqBuPzNPEH7r2JtWRVkTTobcN1P3GiXE9MEBwmmKA800i0xYXuMNHnIO+UAZc/THNJ66FceGvd+PT+zwbs22OT5dPIxtrtb5Xaz3Fx9OAGQC82yyVj4pPISS5DCoSRpsypLIQpJHo5t/iowVwOvFQoAMbRCDpQENWLi4n05KCGSQoKjUxywqpRKE9vwCYJwOxvrsQhilBAzaNilEoZUliVZLHrtc8yMYG4UNS5xOxrQMeeAV4wTTbaX1+BVvB2KrQRU0NCRU0JGWC55eMBnVBA3Pl1UolDUcdeSEtkkBQVI8+fRSiyLnRK/zZZRX92SCfyn6h0wPDktWmv7t8MvVf5kjdNSjzR7jBKHta9pq1wBBG0EVBWpntRkpJNC0LEO9ptWI7z3R1z8qrrTHimZdZZwVP27GXlkDQXOIAAxJNABxW6Ukll8jwcHnt92pkkznRto3AZU1qZuI4/YL57U2Rsscorb83NMU0tyAuBYjS5lSWQhSSSWNFMlBUJMBggEREk54ISx5ygqQwrFyXLAwE6p1hsOIqCK4jYd4SSSeE8lcs4xlFUDdozClEoGQ70yMjwUFQQDNo2KUWQ22m1SBwTcFGCMElwbqtc19a1qKEFpFM9hGOBHkrSikk0yBCoBufLqpRKG+2O4JgnA+wmmKggYnzUolFvcNytnaS4yNxprNDXN5OA7wPMU4rZp9PG1b5+WPuUnPhPVtCbOYrP2Bfr9m46ppTuuOsAcTkS7pRanS6klnJ6Oht44NeBoFU2mQ040hjgc2M1c/V1tUYZkgEnZ8JUrUwpTzz8DzNfmUlH3nm953tJOe87u7GjIe54lefdqZ3P0nt4GOMUiCuJYEBFkzPNWLCUJFRuIOCEEkioxVSp1AcfkeSAiKxcUx5CEEhkgKgg6SFAAPG9AdQgEAxaM+ilFkNKSRyOKqgjJIaKKCoIBEza0UkoGRAIMi1BBGmzKksh+7rfJC/XjdQ7RscNzhtC61WyrlxRIlFNYZ6doRpLHNJqfBI5pBYTmRjVp25HivT/wAmF0PBrp9jposwtx0ZuVzPYMve9HTONBhQVoNg96rdTFKCPB1kuK5lHfVviiZ32tcSMGUBrz3Diqam6uuPpLPsM8YtvY8/Xz5pOICI/M81YscQkkQkUUFWOFQQCA5JkeSEoiKxYdssJe9rAQC5waCcgXGmPirQjxSUfEhvCyaC9tFxBA6UzVLaYalK1cG0He4rdZoeCDlxfIijN1igupXXBdf4pz26+pqNBrq61akjKoXKjSd42s4NOroenim3nJYWvQ+RjS7tY9UCpLtZuHgVeegnFZ4l9DErU+hTNFAvPLnUA1Kwk9FJKFMiATIyLUEAgBANzPIpRSiUKjJIxUBikII0uZUlkIKkk32jmjUcckM4mc4tc11W6uqRtG00oSM16tehikpKWfoc67mrFt1PU1U948qv7SvvvbCMdd1Xu2Yn4Rt6+CrPtDEeGC38WeBZXmxt+LMlNK5xLnEuJzJxJXnSk5PL5lhCqAQER2asWOISLjadighklQVBAJlyKEoiqxYAUBoZr7dabP8Ah3kCQub3zgHBprjTJ1QOBWyetbq4ZLL8TppOGq7jfLcVcb/wTnl9Hl7QGtaTsJPeJGA8VXTa2MMvDO/aF0boxUegxeV6y2g974djG1oPc8SuV+pnb6z28DBGCXIiizPPyO/lKz8S8S/C/A5LZntGs5pAGZPgikm8IlVzbwkRHkn4akDcrYxzJdco+smhmqkqdY8ggjMYongE18msdagbXYMB0Gzkknl5KiVUHHNqhJ1CAQEWXMqSyEqSSxue9pIHd15DTm2msDx1ajxBB55LtTfKp7Pbw/MFJRUj2L/Usf1D/l7LV3iPW7w8udc7iSS8VJrkdvVeR33sPP7p+JGtd3OYNaoI4bOitGxPYrKtrchK5zOoCEVYuLaWjeVBBMs8D3jWaw0G2oAw5qrklsyVBvkNRyBwqFeUWuZa2mdTxMUqnITNkVJKIqksCAmR3XMRURmh3lo9SqOyK6k8DJ1j7aP44S9vIEjkR6FUlwy5Musrmi6gnDhhUcCCCOYK4NYOieR1QSVWkr6Q0+pzR6u+y0aZZmatGs2e4h6J/wC7/B/Wumr6e/8Ag7a79vv/AILu09mBV4bTiAVljnoec8LmUFsfG49yMNG/aemQWiKa5szyknyRHVigIBuR5BFFJKHFBAICK/M81YsJQkt7DcwkYHmTPYBlwJquMrcPGC8YZRcfhHf+V3gPdW/yGdN/EluCzMsU17W4EajTXeeWwLtXDG7ONk87Iql1OIICGrFwQFxYreBAYyDXvAcnVx6VPkuTh6eTpC3gwQmNAFAujbbyyllkrJcUuZ1QcxE2SlEojKSwIDWaPXlHKBFKdWQYNdXB+4Y5O9Vmsrxuj0dL3NvoT2l4+P8Af1LuW7XD4SD5Llk0WdnzXqvPyIckZbgQQhinCUHiSwJQoUOlb+7G3eSfAAf1LXpFu2btCt2xGif+7/B/Wp1fT3/wW137ff8AwW89ha81cSeFcByWZTa5HmuCb3Bt3RD5PEk/dOOXiR3cRxtlYPkb4BRxPxLcK8CJesjGsc0UDiCBQCort4K9eeJMKcISTayUMbKceJWhvJxtt7yWcJeQpQcgQER2Z5qxY4hJLu+3uiOGLTm3fxG4qk4KRMZYNH/3Fv0P8B7qncM68QxfLJ3Sys1SGtke2mVaOIxJzUtQjJ+ZWzjcmiE26pNwHMj7J3kSndyFi5372+J9lHeonumQLwb2TtRxqS2uHEkfZda05rKO9eissjxRwMusTw1r6DVcARi3I8K1UcSzg42VuDwwZDvU5OWRxQQCAEAifJSiURlJYEAIQaS49KXR0ZNV7Njs3N5/UPPmuM6s7o9TS9oyh6Nm68ev9/U2UMrJGhzSHtO0Yj/6szTR7KcLY5WGiPNdzT8Pd8wmTJZoIS3ht9CovK4tehe0upkWk7eC6wtlD1TL3Woozhbezf8AsjWG7mQl2rXvUrU1yrw4pZbKeMme26VmOLoS1zOIzPaWs+I9Np5BWUW+RDklzK60WyV+DGOaN9DXx2LooRXNnJyk+SK20QuYNZ4IBNKnfn9iu0WpbIiNNk3iKyNNeDkaqWmuZE6pw9ZNHVBzOoCGVYscQk484FCGew/6Y4eYW7gPT7sqtI4dW0yje7W/mAd6krytTHFrONixJlauBQEBk78kaZ3VBwAFMN1c+q9ChS7tYN9MbnUlDC9vX4FlYrsD2NeXEVaDSmQ3VWedjUmjzrKWpvieWSRc7Pqd/wAfZU71le6Ql9zN2OIPGh9KIrX1IdSKd7aEg7CR4Lutzi9hKEDdoy6qUSiOpLAgLu79GJpWh9Wsa4VGsTUg5GgGS5Sting3U9n22RUtkmSZNDZtj4z1eP6So76J0fZdvRr5/YTZbpt1ndrRtrvDXNIdzaSK+qOcJcxDTauh5gvg9vgaK778DqNmY6B+VHhwa4/lcRTofNcpV45bno06xS2sTi/by9zLhczaIkia7MAoc51Qn6yyRn3cw5VHI+6ZM0tBU+WV+e0jPuojFpHhRTkyz7OkvVefkRJYXN+IU/zehjsqnW8SWCqvuwvla0NLRQ1NSRsoMgd5XeiyMG2zrprY1tuRSiwvhJ19XvNoKGvzNNfJaJWxmthrdTCdfCueTioeUdQEJWLggNZofC1/ZtAGsZA12/F3pT0K4uLlYl5HepJ4R7KvZPTMZpxZ6SMk+ppb1aa+jvJeZro4kpGW9b5M0sJwBAYi8n60sh/O7wBoPRerUsQSPapWK4r2Gsur9zH+gei863135nlX/qS8yWuZyIlutwjFM3bBu4lXhByKTmomeJWkzHEA3aMuqlEojqSwIDe6K3ux8TYiaPjaG0O1owaR0oFktjh5Pe0OrhKCrls1t5l+uZ6QIDhGxCAaAMAKBBjB1CQQAgETBpadalKY12DehSyMZRalyMXb71AJbFiK/EfsF3jV4ny9tkVJqDyvEqSS41xJPVdtkcN2KFmf9Dv5So4l4k8L8BuVpaaOFDnQ4KVvyJVc2spMhKwBAa3/AKX2YvtwIrqxsc9245MaD1dX+FdaY5nnwNGlWbD2Rbj0il0tsmvZyRnGQ/oMHeRJ6LNq4cVb9m5yujmJgV45jBARH3bCc42+FPRdFbNdTqr7F+5khjWsbQYNaPABUbbeTnKTbyyqtV4vdhGCBvoanluXaNaXrHCU2+RDFikPyO64eqvxx8TnwSfQW27Jfpp1b7qO8iT3cjr7skAJNKAEnHYEVibwWVUm8FZra5DW4k5Douzi4rLO09HbBZa2OyWOQZxuH8J9VRST6nDhYwVYgVHIWkFpoRkQoayDV3JpPkyXkD/mXpyWedWN0elpu0JQ9Ge6NZFKHCoNVxPbrsjYuKLFoXBACAEAIBE0TXAtcAQcwcQeYRPBWUYyWJLKIs92xltGsY0jKjWj0CnifUy36SE4Ygkn0KpzSMDhRDxWnF4ZxCDJ6SPrNTc1o9T916OmWIHq6NYr95oLrAMEdRXuD0WK3135nn3/AKkvMXJYIjnG3wA9FVTl4nHhRtf+n9zsijkla2hlIGZPdZXKvEu8F6mjT4OJ9TTp4KKb8TWLWaRL2gggioIoRwOaNZB5leNkMUr4z8pw4tzafCi8KyHBNxMEo8LwRlzKggBACAEAICJez6QyH8pHjh910qWZo60LNkfMy9y/v4+Z9Ct9/wCmz09R+lI2a8w8cS9gOYB5gFSCO+7ojnG3oKeitxy8SvChh9ywnYRycfup72RHAixsRMQAaSaYY41G4qjeXk702SqeYsvrNOHio6jcVU92m6NseJDqHYEAIAQAgBARrXZA/gd/umTLqNLG3fkyomhLTQj+/JSeNZVKt4kjD3u+s0h/NT+Xu/ZepSsQR6tCxXE1V0/uY/0D0Xn2+u/M8u/9SXmToYi9wa3EuIA5k0CpGLk8I5pZPT7HZxGxsbcmgDnTb1XvQioxUUb4rCwPKxIIDL6a3dVonaMW9136ScD0J8+Cwa2rK410M98f3GPXmmYEAIAQAgBAVekj6QEb3NHnX7LRplmw1aRZtKC5f38fP7Fa7/02btR+lI2a8w8cEAIAQAgLS6oiASdtKdK4+aM9bs+uUYuT6k9QeiCAEAIAQAgBAIkjDhQioQpOuM1wyRkbx0OFXPbI41JJwBIqa8KrXHVNLGDLarKl6KyvmSLJDqMaytdUAVyrTgs85cUmzyJy4pOXiazQu7tZ5ncMG91vFxGJ6A068Ft0VWXxv3HSiOXk2S9I1AgBAJljDgWuFQQQRvBwKhpNYYayebXvd5glMZyzad7Tkeew8l4l1TrlwmGceF4IS5FAQAgBACAg3tYDM0NDtWhrlWuBG/iutVndvODvRaqm3jJX2G4nRyNfrtIaa7QciF2nqFKLWDvZqozg44L5ZDCCAEA9DZnOyGG84BDtXp7LPVX2LCz3e0Yu7x8v7qMnpU6GMd57v5E1DeCAEAIAQAgBACAEAIBh919q4BmDic9nElXrg5yUUYdVpYSTmtn9Ta2KytiY2NuTRTnvJ4k4r3YQUIqKM0Y8Kwh9WJBACAEBWX/dQnjpk9uLDx2g8D7LhqKVbHHXoc7IcSPPJGFpLSKEGhB2EZheM008MxiVBAIAQAgBACA6xpJoBUoWjFyeEsk2G7XH4jTzKZNtegnLebx9SbDY2N2VO84qMm+vSVQ6Z8yQhpBACAEAIAQAgBACAEAIAQGkuew9m3WcO87yG5expaO7jl82efdZxvC5FitRxBACAEAIAQGe0nuLtR2sY/aAYj6wP6h/bcseq0/H6Uef1ONted0YksO4+BXl4MuGcooGAohAoRk5AnoULKEnyTHmWJ5+WnPBDvDSXS/b8diXDdg+Y14D3TJsr7PXOb+BNjjDRQCig3wrjBYisC0LggBACAEAIAQAgBACAEAIDiAvLmu3KR4/SPufsvS0mmx6cvcY77s+jEul6BlBACAEAIAQAgBAVd63Xr99mDto+r+6xanS8fpR5/U0VXuOz5GfcCDQ4EbF5TTTwzannc4hIIAQAgBACAEAIAQAgBACAEAIAQAgBAXd1XTk+Qcm/c+y9LTaTHpT+Bjuvz6MS6XoGUEAIAQAgBACAEAIAQEK8LubJjk7f771nv08bfPxOtdrh5GdtVldGaOHI7DyK8m2qVbxI3QsjNbDK5lwQAgBACAEAIAQAgBACAEAIAQDkEDnnVaKn/M1aFcpvEUVlJRWWaC7rqbH3nd53kOXuvWo0sa93uzDbc57LkWK1HEEAIAQAgBACAEAIAQAgBAJkjDhRwBB2FRKKksMlNp5RTWy5NsZ/hP2PuvPt0PWv4GqGp6SKiWJzTRwIPFYJwlB4ksGmMlLdCFUsCAEAIAQAgBACAEAIDrGEmgBJ3DFTGLk8IhtJZZa2O5HHGQ6o3DPqcgt1Whb3n8DNPUrlEu4IGsFGgAf5mvRhCMFiKMkpOTyxxWIBACAEAIAQAgBACAEAIAQAgBACARJGHCjgCNxFVEoqSw0Sm1uiutFyMPwkt8x54+axz0UH6ux3jqJLnuV81yyjKjuRp6rLLRWLludlqIPmQ5LK9ubHDofVZ5VTjzTOqnF8mMrmXOqQCA5VQB2Ozvd8LXHkCuka5y5JlHOK5slw3PKcwG8z7VXeOjtfPY5y1EFyLCz3G0fG4u4DAe61Q0MF6zz8jhLUyfLYsoYWsFGtAHBbIwjFYisHByb3Y4rEAgBACAEAIAQAgBACAEAIAQAgBACAEAIAQAgBAV95LhdyLw5metGa8qzmbonIc1FfMTL67V6tBisLRaDmCAEAIAQAgBACAEAIAQAgBAf/9k=",
+				scaledSize: new  google.maps.Size(20, 20),
+
+			};
+			var marker4 = new google.maps.Marker ({
+				position: {lat: 50.49293294342702,  lng:  80.18839433706779},
+				map: map,
+				icon: icon4
+			});
+			google.maps.event.addDomListener(marker, 'click', function() {
+				document.getElementById("maptxth3").innerHTML = "You choose Kolsai, here some information";
+				document.querySelector("#mapkolsai").style.display = "flex";
+				document.querySelector("#txtkolsay").style.display = "flex";
+				document.querySelector("#mapcharyn").style.display = "none";
+				document.querySelector("#txtcharyn").style.display = "none";
+				document.querySelector("#mapbal").style.display = "none";
+				document.querySelector("#txtbal").style.display = "none";
+			});
+			google.maps.event.addDomListener(marker2, 'click', function() {
+				document.getElementById("maptxth3").innerHTML = "You choose Charyn, here some information";
+				document.querySelector("#mapcharyn").style.display = "flex";
+				document.querySelector("#txtcharyn").style.display = "flex";
+				document.querySelector("#mapkolsai").style.display = "none";
+				document.querySelector("#txtkolsay").style.display = "none";
+				document.querySelector("#mapbal").style.display = "none";
+				document.querySelector("#txtbal").style.display = "none";
+			});
+			google.maps.event.addDomListener(marker3, 'click', function() {
+				document.getElementById("maptxth3").innerHTML = "You choose Big Almaty Lake, here some information";
+				document.querySelector("#mapbal").style.display = "flex";
+				document.querySelector("#txtbal").style.display = "flex";
+				document.querySelector("#mapkolsai").style.display = "none";
+				document.querySelector("#txtkolsay").style.display = "none";
+				document.querySelector("#mapcharyn").style.display = "none";
+				document.querySelector("#txtcharyn").style.display = "none";
+			});
+			var rectangle = new google.maps.Rectangle({
+    			strokeColor: "#FF0000",
+    			strokeOpacity: 0.8,
+    			strokeWeight: 2,
+    			fillColor: "#FF0000",
+    			fillOpacity: 0.35,
+    			map,
+    			bounds: {
+    			  	north: 43.3220,
+    			 	south: 43.2220,
+    			  	east: 76.9512,
+    			  	west: 76.8512,
+    			},
+  			});
+
+		}
+		
+	</script>
+</head>
+<body>
+	
+	<div class="nav">
+		<label for="toggle">&#9776</label>
+	</div>
+	<input type="checkbox" id="toggle">
+    <div class="container">
+		<div class="header">
+			<div class="logo">
+				<img src="logo.jfif" alt="" onclick="window.location.reload()">
+			</div>
+		    <div class="main_menu">
+				<ul>
+					<li onclick="inspiration()">INSPIRATION</li>
+					<li id="DESTINATIONS" onclick="mapap()">DESTINATIONS</li>
+					<li id="PLACES" onclick="change(this)">PLACES
+						<span class="down">▼</span>
+          	    		<span class="up">▲</span>
+					</li>
+					<li id="CONTACT" onclick="popup()">CONTACTS US</li>
+
+				</ul>
+            </div>
+		</div>
+    	<div class="visibleMenu">
+          	<div class="subMenu">
+              	<p class="p-title" onclick="region()">East Kazakhstan</p>        
+         	</div>          
+            <div class="subMenu">
+                <p class="p-title" onclick="region1()">West Kazakhstan</p>     
+            </div>      
+            <div class="subMenu">
+                <p class="p-title" onclick="region2()">South Kazakhstan</p>    
+            </div>           
+            <div class="subMenu">
+              <p class="p-title" onclick="region3()">North Kazakhstan</p>   
+            </div>        
+        </div>
+	</div>
+	<div class="carouseltxt">
+		<h1>RELEASE | YOURSELF,
+			TO FIND OUT | YOURSELF</h1>
+	</div>
+	<div class="main">
+		<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+			<div class="carousel-inner">
+			  <div class="carousel-item active">
+				
+				<img src="https://wallpaperaccess.com/full/1968773.jpg" class="d-block w-100" alt="...">
+			  </div>
+			  <div class="carousel-item notactive1">
+				
+				<img src="https://wallpaperaccess.com/full/1968883.jpg" class="d-block w-100" alt="...">
+			  </div>
+			  <div class="carousel-item">
+				
+				<img src="https://www.onhisowntrip.com/wp-content/uploads/2020/08/GoodFon.jpg" class="d-block w-100" alt="...">
+			  </div>
+			</div>
+			<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+			  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			  <span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+			  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+			  <span class="sr-only">Next</span>
+			</a>
+		</div>
+		
+	</div>
+	<div class="row">
+		<div class="col-sm">
+			  <div class="card" style="width: 18rem;">
+				<div class="card1">
+					<div class="front"><span><img src="https://cdn.reinisfischer.com/sites/default/files/styles/article/public/1_138.jpg?itok=seSl1n_H"></span></div>
+					<div class="back"><span><img src="https://cdn.reinisfischer.com/sites/default/files/styles/article/public/1_138.jpg?itok=seSl1n_H"></span></div>
+				  </div>
+				  <div class="card-body">
+					<h5 class="card-title">Hotels</h5>
+					<p class="card-text" style="font-size: 12px">If your favorite place has hotels you can find information here</p>
+					<a href="#" class="btn btn-primary" style="background-color: white; color: black; border-color: black">Learn more</a>
+				  </div>
+			</div>
+		</div>
+		<div class="col-sm">
+			  <div class="card" style="width: 18rem;">
+				<div class="card1">
+					<div class="front"><span><img src="https://caspiannews.com/media/caspian_news/all_original_photos/1503299057_2399406_1503298772_853446besbarmak.jpg"></span></div>
+					<div class="back"><span><img src="https://caspiannews.com/media/caspian_news/all_original_photos/1503299057_2399406_1503298772_853446besbarmak.jpg"></span></div>
+				  </div>
+				  <div class="card-body">
+					   <h5 class="card-title">Food&Drink</h5>
+					<p class="card-text" style="font-size: 12px">Kazakhstan has one of the best cuisine in the world</p>
+					<a href="#" class="btn btn-primary" style="background-color: white; color: black; border-color: black">Learn more</a>
+				  </div>
+			</div>
+		</div> 
+		<div class="col-sm">
+			 <div class="card" style="width: 18rem;">
+				<div class="card1">
+					<div class="front"><span><img src="https://astanatimes.com/wp-content/uploads/2014/05/5121792.jpg"></span></div>
+					<div class="back"><span><img src="https://astanatimes.com/wp-content/uploads/2014/05/5121792.jpg"></span></div>
+				  </div>
+				  <div class="card-body">
+					<h5 class="card-title">Culture</h5>
+					<p class="card-text" style="font-size: 12px">Kazakhstan exists much time and it has self interesting culture</p>
+					<a href="#" class="btn btn-primary" style="background-color: white; color: black; border-color: black">Learn more</a>
+					  </div>
+				</div>
+			</div>
+		<div class="col-sm">
+			  <div class="card" style="width: 18rem;">
+				<div class="card1">
+					<div class="front"><span><img src="https://kazakh-tv.kz/upload/anounces/big_2e3786ab2748695a0765576c45308342.jpg"></span></div>
+					<div class="back"><span><img src="https://kazakh-tv.kz/upload/anounces/big_2e3786ab2748695a0765576c45308342.jpg"></span></div>
+				  </div>
+				  <div class="card-body">
+					<h5 class="card-title">Style</h5>
+					   <p class="card-text" style="font-size: 12px">Kazakh's traditional shoes very beautiful and interesting</p>
+					<a href="#" class="btn btn-primary" style="background-color: white; color: black; border-color: black">Learn more</a>
+				  </div>
+			</div>
+		</div>
+	</div>
+	<div class="user_profile" onclick="logout()">
+    	<img id="profile_img" src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/21760012/original/d4c0c142f91f012c9a8a9c9aeef3bac28036f15b/create-your-cartoon-style-flat-avatar-or-icon.jpg" alt="">
+		<p id="user_name">John</p>
+		<button>Log Out</button>
+    </div>
+    <div class="popup">
+    	<div class="popup-content">
+    		<img  class="icon" src="icon.png">
+    		<img onclick="close_popup()" class="closed" src="close.png" alt="" width="7%">
+    		<center>      	
+    			<input id="username" type="text" name="username" placeholder="Username">
+    		</center>
+    	    <center>	
+    	   		<input type="password" id="pass" name="pass" placeholder="Password">
+    	    </center>
+    	    <center>
+    	    	<input type="password" id="pass2" name="pass2" placeholder="Password Again">
+    	    </center>
+    	    <center><a id="a" href="">Can't access?</a></center>
+    	    	<button type="sign" onclick="login(username.value)" class="btn btn-outline-danger">Log In</button>
+    	  	<center>Have already account?<a id="a1" href="">Login Here</a></center>
+    	</div>
+	</div>
+	<div id="map"></div>
+	<div id="maptxt">
+		<h3 id="maptxth3">Hey! You can choose your favorite place</h3>
+	</div>
+	<div id="mappicture">
+		<img src="https://www.journalofnomads.com/wp-content/uploads/2017/10/Featured-Photo-2-e1546779415965.jpg" id="mapkolsai">
+		<img src="https://www.journalofnomads.com/wp-content/uploads/2017/10/Charyn-Canyon-Featured-photo.jpg" id="mapcharyn">
+		<img src="https://media.tacdn.com/media/attractions-splice-spp-674x446/07/6f/4b/69.jpg" id="mapbal">
+		<p id="txtbal">Big Almaty Lake (Kazakh: Үлкен Алматы көлі / Úlken Almaty kólі, Russian: Большое Алматинское Озеро / Bol'shoye Almatinskoye Ozero) is natural alpine reservoir. It is located in the Trans-Ili Alatau mountains, 15 km south from the center of Almaty in Kazakhstan. The lake is 2511 meters above sea level</p>
+		<p id="txtkolsay">Kolsay Lakes National Park (Kazakh: Көлсай көлдері ұлттық паркі, Qólsaı kólderi ulttyq parki) is located on the north slope of the Tian Shan Mountains, southeast Kazakhstan (10 km from the border with Kyrgyzstan).</p>
+		<p id="txtcharyn">Charyn Canyon (also known as Sharyn Canyon, Kazakh: Шарын шатқалы, Sharyn shatqaly) is a canyon on the Sharyn River in Kazakhstan (200 kilometres (120 mi) east of Almaty, close to the Chinese border). The canyon is roughly 90 kilometres (56 mi) in length.</p>
+	</div>
+	<div class="east">
+		<div>
+			<img src="https://admin.kazakhstan.travel/files/public/201812/04/8aaf302d3ef14c229fd53ed375da83a4/%D0%90%D0%BB%D0%B0%D0%BA%D0%BE%D0%BB%D1%8C.jpg" width="500px" height="400px">
+			<div id="alakoltext">Alakol Lake (Kazakh: Алакөл, Alakól from Turkic "motley lake") is a lake located in the Almaty and Shyghyz provinces, east central Kazakhstan. Its elevation is 347 m (1,138 ft) above sea level.
+
+				The lake is the northwest extension of the region known as the Dzhungarian Gate (Alataw Pass), a narrow valley connects the southern uplands of Kazakhstan with arid northwest China. The Dzhungarian Gate is a fault-bounded valley (see vertical line on the image along the southwest side of the lake) where the elevation of the valley floor is between 350 and 450 m above sea level and the peaks of the Dzhungarsky Alatau range (lower left) reach 4,463 m (14,642 ft) above sea level. Two well-defined alluvial fans are visible where mountain streams cut through the faulted landscape to the southwest of the lake.</div>
+		</div>
+		<div>
+			<img src="https://visitkazakhstan.kz/uploads/img/127727213396_tour.jpg" width="500px" height="400px">
+			<div id="altaitext">The Altai Mountains (/ɑːlˈtaɪ/), also spelled Altay Mountains, are a mountain range in Central and East Asia, where Russia, China, Mongolia, and Kazakhstan come together, and where the rivers Irtysh and Ob have their headwaters. The massif merges with the Sayan Mountains in the northeast, and gradually becomes lower in the southeast, where it merges into the high plateau of the Gobi Desert. It spans from about 45° to 52° N and from about 84° to 99° E.</div>
+		</div>
+		<div>
+			<img src="https://files.kazakhstan.travel/files/public/201901/24/72341b5186f4414c866b3790c867023e/%D0%A2%D1%83%D0%B7%D0%BA%D0%BE%D0%BB%D1%8C1.jpg" width="500px" height="400px">
+			<div id="bukhtarmatext">The Bukhtarma (Kazakh: Бұқтырма, romanized: Buqtyrma, بۇقتىرما, pronounced [bʊqtəɾˈmɑ]; Russian: Бухтарма, romanized: Bukhtarma) is a river of Kazakhstan. It flows through East Kazakhstan Region, and is a right tributary of the Irtysh. The river is 336 kilometres (209 mi) long, with a basin area of 12,660 square kilometres (4,890 sq mi).[1] The source of the river is in the Southern Altai Mountains. The average water flow rate is 214 cubic metres per second (7,600 cu ft/s).</div>
+		</div>
+	</div>
+	<div class="west">
+		<div>
+			<img src="https://aboutkazakhstan.com/blog/wp-content/uploads/2013/07/western-kazakhstan-mangystau-region-9.jpg" alt="" width="500px" height="400px">
+			<div id="moutext">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum inventore, in nobis reiciendis voluptatum cum ipsum consequuntur, fugiat quae sunt quia odio asperiores nostrum laboriosam animi. Ipsum ratione accusantium ex.</div>
+		</div>
+		<div>
+			<img src="https://cdn.quizzclub.com/interesting-fact/2020-02/the-15-most-beautiful-places-to-visit-in-kazakhstan-5-abandoned-ships-of-aral-sea.jpg" width="500px" height="400px" alt="">
+			<div id="moutext2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, eligendi. Nihil maxime deserunt, inventore voluptas dolor officiis hic explicabo quo ad voluptatum! Mollitia adipisci quaerat odio veritatis cumque reprehenderit quos!</div>
+		</div>
+	</div>
+	<div class="north">
+		<div>
+			<img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Burabai.jpg" alt="" width="500px" height="400px">
+			<div id="burabaitext">The Burabay National Park (Kazakh: «Бурабай» мемлекеттік ұлттық табиғи паркі, «Býrabaı» memlekettik ulttyq tabiǵi parki) is a natural park located in the Burabay District, in Aqmola Region, Kazakhstan.
+
+				The park is under the direct jurisdiction of the President of Kazakhstan.
+				
+				In the protected area of the national park, economic and leisure activities are prohibited, as the park is under regulation of nature reserves.</div>
+		</div>
+	</div>
+	<div class="south">
+		<div>
+			<img src="https://www.journalofnomads.com/wp-content/uploads/2017/10/Charyn-Canyon-Featured-photo-1024x603.jpg" alt="" width="500px" height="400px">
+			<div id="charyntext">Charyn Canyon (also known as Sharyn Canyon, Kazakh: Шарын шатқалы, Sharyn shatqaly) is a canyon on the Sharyn River in Kazakhstan (200 kilometres (120 mi) east of Almaty, close to the Chinese border). The canyon is roughly 90 kilometres (56 mi) in length.[1] It is part of the Charyn National Park (established on 23 February 2004), and is located within the territory of the Uygur District, Raiymbek District and Enbekshikazakh District (of the Almaty Province). Over time, the canyon has gained colorful formations of varying shapes and sizes. Though it is much smaller than the Grand Canyon, it has been described as being equally impressive</div>
+		</div>
+	</div>
+	<div class="inspiration">
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/kK18ez9Sapc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/Qlpyeu-B9i8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/4G0tq0mLC30" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="lab11.js"></script>
+</body>
+</html>
